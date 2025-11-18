@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Assistant Chatbot</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f6f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #ff6b01;
+            padding: 15px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            margin: 10px 0;
+            padding: 10px;
+            max-width: 80%;
+            border-radius: 10px;
+        }
+
+        .user {
+            background: #d1e7ff;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background: #ffe2c3;
+            align-self: flex-start;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            background: #ff6b01;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff812c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="header">🍔 Food Assistant Chatbot</div>
+
+        <div class="chat-box" id="chat-box"></div>
+
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Ask something..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function appendMessage(text, sender) {
+            const chatBox = document.getElementById("chat-box");
+            const msg = document.createElement("div");
+            msg.className = "msg " + sender;
+            msg.innerText = text;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("user-input");
+            const userText = input.value.trim();
+
+            if (userText === "") return;
+
+            appendMessage(userText, "user");
+            input.value = "";
+
+            // Simple demo responses
+            let botResponse = "Sorry, I didn't understand that.";
+
+            if (userText.toLowerCase().includes("menu"))
+                botResponse = "Our menu includes pizza, burgers, pasta, and drinks!";
+            else if (userText.toLowerCase().includes("order"))
+                botResponse = "Sure! What would you like to order?";
+            else if (userText.toLowerCase().includes("price"))
+                botResponse = "Prices start from ₹99. What item do you want to check?";
+            else if (userText.toLowerCase().includes("recommend"))
+                botResponse = "I recommend trying our special cheese burst pizza!";
+            else if (userText.toLowerCase().includes("hello"))
+                botResponse = "Hello! How can I assist you with food today?";
+
+            setTimeout(() => {
+                appendMessage(botResponse, "bot");
+            }, 600);
+        }
+    </script>
+</body>
+</html>
