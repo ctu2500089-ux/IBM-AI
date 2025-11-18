@@ -1,2 +1,2 @@
 # IBM-AI
-This is the Man repo as food recommendation
+This is the Main food resportise
